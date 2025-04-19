@@ -1,0 +1,16 @@
+# .htaccess
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect all requests to the public/index.php file
+    RewriteRule ^public/(.*)$ public/$1 [L]
+    RewriteRule ^(.*)$ public/index.php [L]
+</IfModule>
+
+# Deny access to sensitive files
+<FilesMatch "\.(env|ini|log|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
