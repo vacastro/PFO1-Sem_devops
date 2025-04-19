@@ -12,6 +12,51 @@
     <ul>
         <li>Castro Veronica Analia</li>
     </ul>
+
+    <h2>Ingreso de Datos Personales</h2>
+
+  <form id="formularioUsuario">
+    <label for="username">Nombre de usuario:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Contraseña:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('formularioUsuario');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const datos = {
+        username: username,
+        password: password
+      };
+
+      fetch('https://tu-backend.com/api/usuario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Respuesta del servidor:', data);
+        alert('Datos enviados correctamente');
+      })
+      .catch(error => {
+        console.error('Error al enviar:', error);
+        alert('Hubo un error al enviar los datos');
+      });
+    });
+  </script>
     
 </body>
 </html>
